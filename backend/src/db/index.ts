@@ -1,6 +1,7 @@
 import { Pool } from "pg";
 import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
 import * as userSchema from "./schema/user";
+import { messageSchema } from "./schema/message";
 
 if (
   !process.env.DB_HOST ||
@@ -21,8 +22,9 @@ const pool = new Pool({
 
 const combinedSchemas = {
   ...userSchema,
-  // Add other schemas here
+  ...messageSchema,
 };
+
 export const db: NodePgDatabase<typeof combinedSchemas> = drizzle(pool, {
   schema: combinedSchemas,
 });
