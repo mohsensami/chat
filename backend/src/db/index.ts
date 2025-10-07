@@ -2,27 +2,22 @@ import { Pool } from "pg";
 import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
 import * as userSchema from "./schema/user";
 import { messageSchema } from "./schema/message";
+import { conversationSchema } from "./schema/conversation";
+import { userConversationSchema } from "./schema/userConversation";
 
-if (
-  !process.env.DB_HOST ||
-  !process.env.DB_NAME ||
-  !process.env.DB_USER ||
-  !process.env.DB_PASSWORD
-) {
-  throw new Error("Database credentials missing... ");
+if (!process.env.DB_URL) {
+  throw new Error("Database URL missing...");
 }
 
 const pool = new Pool({
-  port: Number(process.env.DB_PORT),
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  connectionString: process.env.DB_URL,
 });
 
 const combinedSchemas = {
   ...userSchema,
   ...messageSchema,
+  ...conversationSchema,
+  ...userConversationSchema
 };
 
 export const db: NodePgDatabase<typeof combinedSchemas> = drizzle(pool, {
