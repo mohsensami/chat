@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import "dotenv/config";
+import createRouter from "./routes";
 
 import { app, server } from "./socket";
-import createRouter from "./routes";
 
 const port = process.env.PORT || 3001;
 const router = createRouter();
