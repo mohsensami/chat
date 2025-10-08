@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { signIn, signUp } from "../controllers/user";
+import { signIn, signOut, signUp } from "../controllers/user";
 // import { privateRoute } from "../middleware/privateRoute";
 
 const userRouter = Router();
 
 userRouter.post("/signin", signIn);
 userRouter.post("/signup", signUp);
-// userRouter.post("/signout", signOut);
+userRouter.post("/signout", signOut);
 // userRouter.get("/", privateRoute, getUsers);
 
 export default userRouter;
