@@ -16,10 +16,10 @@ const Login = () => {
     formState: { errors },
   } = useForm<User>();
   // const { setUser } = useUserContext();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onGoToRegister = () => {
-    // navigate("/register");
+    navigate("/register");
   };
 
   const onSubmit: SubmitHandler<User> = (data: User) => {
